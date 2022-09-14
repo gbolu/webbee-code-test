@@ -1,4 +1,11 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Event } from './event.entity';
 
 @Entity()
@@ -13,7 +20,8 @@ export class Workshop {
   end: string;
 
   @Column({ type: 'integer', default: null })
-  eventId: number;
+  @ManyToOne(() => Event, (event) => event)
+  eventId: Event;
 
   @Column()
   name: string;
